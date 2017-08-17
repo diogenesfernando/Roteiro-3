@@ -10,31 +10,42 @@ typedef struct{
 
 tAluno gAlunos[100];
 
-int main(){
-	char *curso;
-	int n, i;
-
-	printf("Digite a quantidade de cadastros: \n");
-	scanf("%d", &n);
-	
-	for(i=0; i<n; i++){
-		printf("***Aluno #%d***\n"
-			"Nome: \n"
-			"Endereco: \n"
-			"Matricula: \n"
-			"Curso: \n", i+1);
-		scanf("%s %s %s %s*c", gAlunos[i].nome, gAlunos[i].endereco, gAlunos[i].matricula, gAlunos[i].curso);
-	}
-
-	return 0;
-}
-
-unsigned int ConsultaAlunosPorCurso(char *curso){
+unsigned int ConsultaAlunos(char *curso){
 		int i, cont=0;
-		for(i=0; i < strlen(gAlunos); i++){
+		for(i=0; curso[i] != '\0'; i++){
 			if(strcmp(curso, gAlunos[i].curso) == 0){
 				++cont;
 			}
 		}
 		return cont;
 }
+
+int main(){
+	char consulta[30];
+	int n, i, x;
+
+	printf("Digite a quantidade de cadastros: \n");
+	scanf("%d", &n);
+	
+	for(i=0; i<n; i++){
+		printf("***Aluno #%d***\n"
+			"Nome: ", i+1);
+		scanf("%s", gAlunos[i].nome);
+		printf("Endereco: ");
+		scanf("%s", gAlunos[i].endereco); 
+		printf("Matricula: ");
+		scanf("%s", gAlunos[i].matricula);
+		printf("Curso: ");
+		scanf("%s*c", gAlunos[i].curso);
+	}
+
+	printf("Consulte os cadastros, digite o nome do curso: ");
+	scanf("%s", consulta);
+
+	x = ConsultaAlunos(consulta);
+	
+	printf("Numeros de cadastros: %d\n", x);
+	return 0;
+}
+
+
